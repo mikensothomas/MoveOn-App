@@ -11,11 +11,15 @@ class App {
     constructor() {
         this.app = express()
         this.middlewares()
+        this.router()
         this.startServer()
     }
 
     middlewares() {
         this.app.use(express.json())
+    }
+
+    router(){
         this.app.use(router)
     }
 
