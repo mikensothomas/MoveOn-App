@@ -1,6 +1,7 @@
 import express, { type Application } from "express"
 import dotenv from "dotenv"
 import { router } from "./routers/routes.js"
+import { run } from "./models/db/connection.js"
 dotenv.config()
 
 const port = process.env.PORT
@@ -27,6 +28,8 @@ class App {
         this.app.listen(port, ()=> {
             console.log("App running at", port)
         })
+
+        run()
     }
 }
 
