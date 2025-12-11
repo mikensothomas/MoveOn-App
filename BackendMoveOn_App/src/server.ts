@@ -11,8 +11,8 @@ class App {
 
     constructor() {
         this.app = express()
+        this.app.use(router)
         this.middlewares()
-        this.router()
         this.startServer()
     }
 
@@ -20,12 +20,8 @@ class App {
         this.app.use(express.json())
     }
 
-    router(){
-        this.app.use(router)
-    }
-
     startServer() {
-        this.app.listen(port, ()=> {
+        this.app.listen(port, () => {
             console.log("App running at", port)
         })
 
