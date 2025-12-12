@@ -11,13 +11,13 @@ class App {
 
     constructor() {
         this.app = express()
-        this.app.use(router)
         this.middlewares()
         this.startServer()
     }
 
     middlewares() {
         this.app.use(express.json())
+        this.app.use(router)
     }
 
     startServer() {

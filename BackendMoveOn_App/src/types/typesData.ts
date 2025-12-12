@@ -1,13 +1,21 @@
-enum SexData {
+export enum SexData {
     MASCULINO = "MASCULINO",
     FEMININO = "FEMININO",
     NAO_IDENTIFICADO = "NAO_IDENTIFICADO"
 }
 
-enum CnhCategory {
+export enum CnhCategory {
     A = "A",
     B = "B",
-    C = "C"
+    C = "C",
+    D = "D",
+    E = "E"
+}
+
+export enum TypeAcount {
+    CORRENTE = "CORRENTE",
+    POUPANCA = "POUPANCA",
+    SALARIO = "SALARIO"
 }
 
 export type Users = {
@@ -38,6 +46,6 @@ export type Motocyclists = {
     renavam: string
     bank: string
     account_number: number
-    type_of_account: string
+    type_of_account: TypeAcount
     agency: number
 }
