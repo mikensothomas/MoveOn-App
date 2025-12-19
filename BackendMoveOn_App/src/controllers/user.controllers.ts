@@ -5,7 +5,7 @@ import { db } from "../models/db/connection.js";
 import sql from "@databases/sql";
 import { passwordHash } from "../utils/auth.js";
 
-export async function inserDataUsersControllers(req: Request, res: Response) {
+export async function insertDataUsersControllers(req: Request, res: Response) {
     try {
         const parsed: Users = userSchema.parse(req.body);
 
