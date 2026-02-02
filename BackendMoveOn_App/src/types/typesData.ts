@@ -24,6 +24,8 @@ export type Users = {
     sex: SexData
     email: string
     phone: string
+    isAdmin: boolean
+    type: string
     password: string
 }
 
@@ -45,6 +47,8 @@ export type Motocyclists = {
     color_vehicle: string
     renavam: string
     bank: string
+    isAdmin: boolean
+    type: string
     account_number: number
     type_of_account: TypeAcount
     agency: number

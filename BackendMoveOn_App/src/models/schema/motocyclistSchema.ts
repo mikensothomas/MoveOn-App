@@ -1,14 +1,5 @@
-import * as z from "zod";
-import { CnhCategory, SexData, TypeAcount } from "../../types/typesData.js";
-
-export const userSchema = z.object({
-    name: z.string().min(3, "Nome tem que ter pelo menos 3 caracteres"),
-    cpf: z.string().length(11, "O CPF deve ter 11 dígitos"),
-    sex: z.nativeEnum(SexData),
-    email: z.string().email({ message: "Email inválido" }),
-    phone: z.string().length(11, "O número deve ter 11 dígitos"),
-    password: z.string().min(6, "A senha deve ter pelo menos seis caracteres"),
-});
+import z from "zod";
+import { CnhCategory, SexData, TypeAcount } from "../../types/typesData";
 
 export const motocyclistSchema = z.object({
     name: z.string().min(3, "Nome tem que ter pelo menos 3 caracteres"),
@@ -28,6 +19,8 @@ export const motocyclistSchema = z.object({
     color_vehicle: z.string().min(1, "Campo obrigatório"),
     renavam: z.string().min(1, "Campo obrigatório"),
     bank: z.string().min(1, "Campo obrigatório"),
+    isAdmin: z.boolean().default(false),
+    type: z.string().default("motocyclist"),
     account_number: z.string().min(1, "Campo obrigatório"),
     type_of_account: z.nativeEnum(TypeAcount),
     agency: z.string().min(1, "Campo obrigatório"),
