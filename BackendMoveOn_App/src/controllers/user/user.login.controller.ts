@@ -14,9 +14,8 @@ class LoginUserController {
                 })
             }
 
-            const result = await db.query(sql
-                `
-                SELECT id, password FROM users WHERE email = ${email}
+            const result = await db.query(sql`
+                SELECT * FROM users WHERE email = ${email}
                 `, [email]
             )
 
@@ -31,10 +30,12 @@ class LoginUserController {
             }
 
             const token = getToken(user.id)
+            const {password: _, ...userData} = user
 
             return res.status(200).json({
                 message: "Login feito com sucesso",
-                token
+                token,
+                user: userData
             })
         } catch (error) {
             console.error(error)
