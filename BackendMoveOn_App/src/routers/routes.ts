@@ -4,13 +4,25 @@ import { insertDataUsersControllers } from "../controllers/user/user.register.co
 import { editUsersControllers } from "../controllers/user/user.edit.controller.js"
 import { deleteUserController } from "../controllers/user/user.delete.controller.js"
 import { listUserControllers } from "../controllers/user/user.list.controller.js"
-import { loginUserController } from "../controllers/user/user.login.controller.js"
+import { loginUserController } from "../controllers/login/login.controller.js"
+import { upload } from "../cloudinaryPath/upload/uploads.js"
 
 export const router = Router()
 
 router.get("/", (_: Request, res: Response) => {
     res.json({ message: "Hello App" })
 })
+
+router.post("/upload", upload.single("image"), (req, res) => {
+    try {
+        return res.json({
+            url: req.file?.path,
+            id: req.file?.filename,
+        });
+    } catch (error) {
+        return res.status(500).json({ error: "Erro ao enviar imagem" });
+    }
+});
 
 router.post("/registerUser", insertDataUsersControllers)
 router.put("/editUsersControllers/:id", editUsersControllers.editUser)
