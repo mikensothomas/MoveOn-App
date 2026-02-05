@@ -5,7 +5,8 @@ import { editUsersControllers } from "../controllers/user/user.edit.controller.j
 import { deleteUserController } from "../controllers/user/user.delete.controller.js"
 import { listUserControllers } from "../controllers/user/user.list.controller.js"
 import { loginUserController } from "../controllers/login/login.controller.js"
-import { upload } from "../cloudinaryPath/upload/uploads.js"
+import { upload } from "../cloudinaryPath/uploads.js"
+import { registerMotocyclistCntroller } from "../controllers/motocyclist/register.motocyclist.controller.js"
 
 export const router = Router()
 
@@ -29,3 +30,4 @@ router.put("/editUsersControllers/:id", editUsersControllers.editUser)
 router.delete("/deleteUser/:id", deleteUserController.deleteUser)
 router.get("/userList", listUserControllers.userList)
 router.post("/login", loginUserController.loginUser)
+router.post("/registerMotocyclist", upload.single("cnh_picture"), registerMotocyclistCntroller.registerMotocyclist)

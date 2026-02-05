@@ -1,7 +1,7 @@
 import z from "zod";
 import { CnhCategory, SexData, TypeAcount } from "../../types/typesData";
 
-export const motocyclistSchema = z.object({
+const motocyclistSchema = z.object({
     name: z.string().min(3, "Nome tem que ter pelo menos 3 caracteres"),
     sex: z.nativeEnum(SexData),
     email: z.string().email({ message: "Email inválido" }),
@@ -15,13 +15,25 @@ export const motocyclistSchema = z.object({
     vehicle_license_plate: z.string().min(7, "Placa inválida"),
     mark_vehicle: z.string().min(1, "Campo obrigatório"),
     model_vehicle: z.string().min(1, "Campo obrigatório"),
-    year_vehicle: z.number().int("Deve ser número inteiro"),
+    year_vehicle: z.coerce
+        .number()
+        .int("Deve ser número inteiro"),
+
     color_vehicle: z.string().min(1, "Campo obrigatório"),
     renavam: z.string().min(1, "Campo obrigatório"),
     bank: z.string().min(1, "Campo obrigatório"),
-    isAdmin: z.boolean().default(false),
+    is_admin: z.boolean().default(false),  
     type: z.string().default("motocyclist"),
-    account_number: z.string().min(1, "Campo obrigatório"),
+    account_number: z
+        .string()
+        .transform((val) => Number(val))
+        .refine((val) => !isNaN(val), {
+            message: "Número da conta inválido",
+        }),
+
     type_of_account: z.nativeEnum(TypeAcount),
     agency: z.string().min(1, "Campo obrigatório"),
 });
+
+export default motocyclistSchema;
+export type Motocyclists = z.infer<typeof motocyclistSchema>;

@@ -47,8 +47,8 @@ export type Motocyclists = {
     color_vehicle: string
     renavam: string
     bank: string
-    isAdmin: boolean
-    type: string
+    is_admin: false
+    type: "motocyclist"
     account_number: number
     type_of_account: TypeAcount
     agency: number

@@ -39,7 +39,7 @@ export class DatabaseInit {
                 color_vehicle VARCHAR(50) NOT NULL,
                 renavam VARCHAR(50) NOT NULL,
                 bank VARCHAR(50) NOT NULL,
-                account_number VARCHAR(20) UNIQUE NOT NULL,
+                account_number BIGINT UNIQUE NOT NULL,
                 type_of_account VARCHAR(10) NOT NULL,
                 agency VARCHAR(10) NOT NULL,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
