@@ -14,12 +14,19 @@ class LoginUserController {
                 })
             }
 
-            const result = await db.query(sql`
+            const userMotocyclist = await db.query(sql`
                 SELECT * FROM users WHERE email = ${email}
-                `, [email]
-            )
+            `)
 
-            const user = result[0]
+            const userComum = await db.query(sql`
+                SELECT * FROM motocyclist WHERE email = ${email}
+            `)
+
+            const user = userMotocyclist[0] || userComum[0]
+
+            if (!user) {
+                return res.status(404).json({ message: "Usuário não encontrado" });
+            }
 
             const compareHash = await verifyPassword(password, user.password)
 
@@ -30,7 +37,7 @@ class LoginUserController {
             }
 
             const token = getToken(user.id)
-            const {password: _, ...userData} = user
+            const { password: _, ...userData } = user
 
             return res.status(200).json({
                 message: "Login feito com sucesso",
