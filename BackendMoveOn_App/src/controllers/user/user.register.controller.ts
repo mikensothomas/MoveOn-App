@@ -11,6 +11,30 @@ export async function insertDataUsersControllers(req: Request, res: Response) {
 
         const hash = await passwordHash(parsed.password)
 
+        const userExisteEmail = await db.query(sql`
+            SELECT email FROM users WHERE email = ${parsed.email}
+            UNION
+            SELECT email FROM motocyclist WHERE email = ${parsed.email}
+        `)
+
+        if (userExisteEmail.length > 0) {
+            return res.status(404).json({
+                message: "Email existe"
+            })
+        }
+
+        const userExisteCPF = await db.query(sql`
+            SELECT cpf FROM users WHERE cpf = ${parsed.cpf}
+            UNION
+            SELECT cpf FROM motocyclist WHERE cpf = ${parsed.cpf}
+        `)
+
+        if (userExisteCPF.length > 0) {
+            return res.status(404).json({
+                message: "CPF existe"
+            })
+        }
+
         const result = await db.query(sql`
             INSERT INTO users (
                 name, 
