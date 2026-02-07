@@ -7,6 +7,9 @@ import { listUserControllers } from "../controllers/user/user.list.controller.js
 import { loginUserController } from "../controllers/login/login.controller.js"
 import { upload } from "../cloudinaryPath/uploads.js"
 import { registerMotocyclistCntroller } from "../controllers/motocyclist/register.motocyclist.controller.js"
+import { listMotocyclistController } from "../controllers/motocyclist/list.motocyclist.controller.js"
+import { deleteMotocyclistController } from "../controllers/motocyclist/delete.motocyclist.controller.js"
+import { editMotocyclistController } from "../controllers/motocyclist/edit.motocyclist.controller.js"
 
 export const router = Router()
 
@@ -31,3 +34,6 @@ router.delete("/deleteUser/:id", deleteUserController.deleteUser)
 router.get("/userList", listUserControllers.userList)
 router.post("/login", loginUserController.loginUser)
 router.post("/registerMotocyclist", upload.single("cnh_picture"), registerMotocyclistCntroller.registerMotocyclist)
+router.get("/motocyclistList", listMotocyclistController.listMotocyclits)
+router.delete("/deleteMotocyclist/:id", deleteMotocyclistController.deleteMotocyclist)
+router.put("/editMotocyclist/:id", editMotocyclistController.editMotocyclist)
